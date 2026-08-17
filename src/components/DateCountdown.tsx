@@ -1,0 +1,5 @@
+import { useEffect, useState } from 'react'
+import { Reveal } from './Reveal'
+const target=new Date('2026-08-30T11:30:00+04:00').getTime()
+function getTime(){const d=Math.max(0,target-Date.now());return {done:d===0,days:Math.floor(d/864e5),hours:Math.floor(d/36e5)%24,minutes:Math.floor(d/6e4)%60,seconds:Math.floor(d/1e3)%60}}
+export function DateCountdown(){const [t,setT]=useState(getTime);useEffect(()=>{const id=setInterval(()=>setT(getTime()),1000);return()=>clearInterval(id)},[]);return <section className="date-section"><Reveal><p className="eyebrow">Sunday</p><div className="date-lockup"><span>August</span><strong>30</strong><span>2026</span></div><p className="time">11:30 AM</p><div className="cross-divider">✝</div>{t.done?<p className="remember">A beautiful day we will always remember.</p>:<><p className="count-title">Until Jake’s Baptism</p><div className="countdown" aria-live="polite">{([['days',t.days],['hours',t.hours],['min',t.minutes],['sec',t.seconds]] as const).map(([label,value])=><div key={label}><strong>{String(value).padStart(2,'0')}</strong><span>{label}</span></div>)}</div></>}</Reveal></section>}
