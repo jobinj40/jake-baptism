@@ -1,0 +1,2 @@
+import { motion, useReducedMotion, useScroll } from 'framer-motion'
+export function Atmosphere(){const {scrollYProgress}=useScroll();const reduced=useReducedMotion();return <><div className="film-grain" aria-hidden="true"/><motion.div className="ambient-orb" aria-hidden="true" animate={reduced?undefined:{x:[0,22,-12,0],y:[0,-18,10,0],scale:[1,1.08,.96,1]}} transition={{duration:14,repeat:Infinity,ease:'easeInOut'}}/><div className="scroll-rail" aria-hidden="true"><motion.span style={{scaleY:scrollYProgress}}/></div></>}
